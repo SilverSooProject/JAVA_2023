@@ -13,7 +13,7 @@ public class StarGameFrame extends JFrame {
     private JLabel l1, c;
 
     public StarGameFrame() {
-        instance = this; // Set the instance reference
+        instance = this;
 
         setTitle("하트게임");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,11 +21,11 @@ public class StarGameFrame extends JFrame {
         GamePanel p = new GamePanel();
         setContentPane(p);
         
-        ImageIcon icon = new ImageIcon("hangyodon.png"); // Adjust the file path
+        ImageIcon icon = new ImageIcon("hangyodon.png");
         Image icon2 = icon.getImage().getScaledInstance(500, 100, Image.SCALE_SMOOTH);
         icon = new ImageIcon(icon2);
         c = new JLabel(icon);
-        c.setBounds(0, 360, 500, 100); // Adjust the position and size
+        c.setBounds(0, 360, 500, 100);
         p.add(c);
 
         setSize(500, 500);
@@ -50,7 +50,6 @@ class GamePanel extends JPanel {
     public GamePanel() {
         setLayout(null);
 
-        // 패널에 마우스 리스너 추가
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 new starThread(e.getX(), e.getY()).start();
@@ -58,19 +57,16 @@ class GamePanel extends JPanel {
         });
     }
 
-    // 배경을 그리기 위해 paintComponent 메서드 오버라이드
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // 배경 이미지 설정
         ImageIcon backgroundIcon = new ImageIcon("bg.png");
         Image backgroundImage = backgroundIcon.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
         backgroundIcon = new ImageIcon(backgroundImage);
         g.drawImage(backgroundIcon.getImage(), 0, 0, this);
     }
 
-    // 버블 쓰레드를 위한 내부 클래스
     class starThread extends Thread {
         private JLabel star;
 
@@ -94,7 +90,6 @@ class GamePanel extends JPanel {
                 int x = star.getX();
                 int y = star.getY() + 5;
 
-                // 버블이 화면 아래로 내려갔는지 확인
                 if (y>360) {
                 	remove(star);
                     repaint();
